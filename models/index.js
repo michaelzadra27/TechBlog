@@ -1,7 +1,7 @@
 const User = require('./User');
 const Post = require('./Post');
 const Comment = require('./Comment')
-//Change project to post
+
 
 Post.hasMany(Comment, {
   foreignKey: 'post_id',
