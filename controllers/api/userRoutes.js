@@ -10,6 +10,7 @@ router.post('/', async (req, res) => {
 
     req.session.save(() => {
       req.session.user_id = userData.id;
+      req.session.email = userData.email
       req.session.logged_in = true;
 
       res.status(200).json(userData);
@@ -41,8 +42,9 @@ router.post('/login', async (req, res) => {
 
     req.session.save(() => {
       req.session.user_id = userData.id;
+      req.session.email = userData.email
       req.session.logged_in = true;
-      
+
       res.json({ user: userData, message: 'You are now logged in!' });
     });
 
@@ -60,5 +62,25 @@ router.post('/logout', (req, res) => {
     res.status(404).end();
   }
 });
+
+router.delete("/user/:id", (req, res) => {
+  try {
+    User.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+    if (!userData) {
+      res.status(404).json({ message: 'No user found with this id' });
+      return;
+  }
+  res.json(userData);
+  }
+  catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 
 module.exports = router;
