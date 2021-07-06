@@ -8,8 +8,7 @@ router.get('/', async (req, res) => {
     const postData = await Post.findAll({
       include: [
         {
-          model: User,
-          attributes: ['name'],
+          model: User
         },
       ],
     });
@@ -18,7 +17,7 @@ router.get('/', async (req, res) => {
     const posts = postData.map((post) => post.get({ plain: true }));
 
     // Pass serialized data and session flag into template
-    res.render('homepage', { 
+    res.render('blogPosts', { 
       posts, 
       logged_in: req.session.logged_in 
     });
