@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sylvia's Tech Blog</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
+    
+</head>
+
+<body class="flex-column">
+    <header class="hero">
+        <h1 class="app-title"><a href="/">Mike's Tech Blog</a></h1>
+        <nav class="navbar">
+        <ul class="flex-row">
+            <li class="li-inline nav-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="li-inline nav-item"><a href="#" id="logout-link">Logout</a></li>
+        </ul>
+    </nav>
+    </header>
+    
+    <main class="col-auto">
+        {{{body}}}
+    </main>
+
+    <footer class="footer flex-row justify-center">
+        <a href="/dashboard/new">New Post</a>
+    </footer>
+</body>
+
+<script src="/js/logout.js"></script>
+
+</html>
