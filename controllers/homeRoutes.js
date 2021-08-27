@@ -3,6 +3,7 @@ const { Post, Comment, User } = require('../models');
 //const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
+  console.log("trying to get pOSTS$$$$$$$$$$$$$$$$$$$$")
   try {
     // Get all projects and JOIN with user data
     const postData = await Post.findAll({
@@ -15,11 +16,11 @@ router.get('/', async (req, res) => {
 
     // Serialize data so the template can read it
     const posts = postData.map((post) => post.get({ plain: true }));
-
+    console.log("above Postss")
     console.log(posts)
 
     // Pass serialized data and session flag into template
-    res.render('blogPosts', { 
+    res.render('all-posts', { 
       posts, 
       logged_in: req.session.logged_in 
     });
@@ -43,7 +44,7 @@ router.get('/post/:id', async (req, res) => {
 
     const post = postData.get({ plain: true });
 
-    res.render('aPost', {
+    res.render('single-post', {
       post,
     });
   } catch (err) {
@@ -53,8 +54,9 @@ router.get('/post/:id', async (req, res) => {
 
 
 router.get('/login', (req, res) => {
+  console.log(req.session.logged_in)
   if (req.session.logged_in ) {
-      res.redirect('/');
+      res.redirect('/dashboard');
       return;
   }
 
