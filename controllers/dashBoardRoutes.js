@@ -36,21 +36,24 @@ router.get('/new', withAuth, (req, res) => {
     });
 });
 
-router.get("/edit/:id", withAuth, async (req, res) => {
-    try {
+router.get("/edit/:id", withAuth, (req, res) => {
+    Post.findByPk(req.params.id)
+        .then(postData => {
+            if (postData) {
+                const post = postData.get({ plain: true });
 
-        const postData = await Post.findByPk(req.params.id)
-
-
-        const post = postData.map((post) => post.get({ plain: true }));
-
-        res.render("edit", {
-            layout: "dashboard",
-            post
+                res.render("edit", {
+                    layout: "dashboard",
+                    post
+                });
+            } else {
+                res.status(404).end();
+            }
+        })
+        .catch(err => {
+            res.status(500).json(err);
         });
-    } catch (err) {
-        res.status(500).json(err);
-    }
 });
+
 
 module.exports = router;
